@@ -21,9 +21,9 @@ export function middleware(NextRequest: NextRequest) {
 
     return NextResponse.redirect(redirectUrl);
   } else if (
-    hasAuthToken &&
+    hasAuthToken && 
     isPublicRoute &&
-    isPublicRoute.whenAuthenticated === "redirect"
+    isPublicRoute.whenAuthenticated === "redirect"  
   ) {
     const redirectUrl = NextRequest.nextUrl.clone();
     redirectUrl.pathname = "/";
