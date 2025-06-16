@@ -13,3 +13,16 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  userId          String   @id @default(cuid())
+  userName        String   @unique
+  userEmail       String   @unique
+  userAge         Int      @unique
+  userPswd        String   @unique
+  userMobilePhone String   @db.Char(15)
+  userCreatedAt   DateTime @default(now())
+  userUpdatedAt   DateTime @updatedAt
+
+  @@map("users")
+}
