@@ -16,29 +16,15 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
+import { useFormSignUp } from "@/hooks/useForm/formSignUp";
 import Link from "next/link";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { userSignUpSchema } from "../../../../lib/zod/userSignUpSchema";
 import { onSubmitSignUp } from "../../../../services/onSubmitSignUp"; // Mantenha esta importação
 import { InputMask } from "@react-input/mask";
 import clsx from "clsx";
 
 export default function SignUp() {
-  type formSignUp = z.infer<typeof userSignUpSchema>;
-
-  const form = useForm<formSignUp>({
-    resolver: zodResolver(userSignUpSchema),
-    defaultValues: {
-      userName: "",
-      userEmail: "",
-      userPswd: "",
-      userMobilePhone: "",
-    },
-  });
-
+  const formSignUp = useFormSignUp();
   return (
     <div className="w-full max-w-sm p-3">
       <Card>
@@ -62,16 +48,16 @@ export default function SignUp() {
             <SiGithub size={32} />
             {""} GitHub
           </Button>
-          <Form {...form}>
+          <Form {...formSignUp}>
             {/* O onSubmit DEVE estar aqui na tag <form> */}
             <form
               className="flex flex-col gap-3 mt-3 w-full"
-              onSubmit={form.handleSubmit(onSubmitSignUp)}
+              onSubmit={formSignUp.handleSubmit(onSubmitSignUp)}
             >
               {/* UserName Field */}
               <div className="flex flex-col w-full gap-1">
                 <FormField
-                  control={form.control}
+                  control={formSignUp.control}
                   name="userName" // Use 'name' prop com o nome do campo
                   render={({ field }) => (
                     <FormItem>
@@ -87,9 +73,9 @@ export default function SignUp() {
                   )}
                 />
                 {/* As mensagens de erro DEVEM aparecer aqui se o Zod rejeitar */}
-                {form.formState.errors.userName && (
+                {formSignUp.formState.errors.userName && (
                   <p className="text-red-500/90">
-                    {form.formState.errors.userName?.message}
+                    {formSignUp.formState.errors.userName?.message}
                   </p>
                 )}
               </div>
@@ -97,7 +83,7 @@ export default function SignUp() {
               {/* Email Field */}
               <div className="flex flex-col w-full gap-1">
                 <FormField
-                  control={form.control}
+                  control={formSignUp.control}
                   name="userEmail" // Use 'name' prop
                   render={({ field }) => (
                     <FormItem>
@@ -112,9 +98,9 @@ export default function SignUp() {
                     </FormItem>
                   )}
                 />
-                {form.formState.errors.userEmail && (
+                {formSignUp.formState.errors.userEmail && (
                   <p className="text-red-500/90">
-                    {form.formState.errors.userEmail?.message}
+                    {formSignUp.formState.errors.userEmail?.message}
                   </p>
                 )}
               </div>
@@ -122,7 +108,7 @@ export default function SignUp() {
               {/* Age Field */}
               <div className="flex flex-col w-full gap-1">
                 <FormField
-                  control={form.control}
+                  control={formSignUp.control}
                   name="userAge" // Use 'name' prop
                   render={({ field }) => (
                     <FormItem>
@@ -151,9 +137,9 @@ export default function SignUp() {
                     </FormItem>
                   )}
                 />
-                {form.formState.errors.userAge && (
+                {formSignUp.formState.errors.userAge && (
                   <p className="text-red-500/90">
-                    {form.formState.errors.userAge?.message}
+                    {formSignUp.formState.errors.userAge?.message}
                   </p>
                 )}
               </div>
@@ -161,7 +147,7 @@ export default function SignUp() {
               {/* Password Field */}
               <div className="flex flex-col w-full gap-1">
                 <FormField
-                  control={form.control}
+                  control={formSignUp.control}
                   name="userPswd" // Use 'name' prop
                   render={({ field }) => (
                     <FormItem>
@@ -176,9 +162,9 @@ export default function SignUp() {
                     </FormItem>
                   )}
                 />
-                {form.formState.errors.userPswd && (
+                {formSignUp.formState.errors.userPswd && (
                   <p className="text-red-500/90">
-                    {form.formState.errors.userPswd?.message}
+                    {formSignUp.formState.errors.userPswd?.message}
                   </p>
                 )}
               </div>
@@ -186,7 +172,7 @@ export default function SignUp() {
               {/* Mobile Phone Field */}
               <div className="flex flex-col w-full gap-1">
                 <FormField
-                  control={form.control}
+                  control={formSignUp.control}
                   name="userMobilePhone" // Use 'name' prop
                   render={({ field }) => (
                     <FormItem>
@@ -208,9 +194,9 @@ export default function SignUp() {
                     </FormItem>
                   )}
                 />
-                {form.formState.errors.userMobilePhone && (
+                {formSignUp.formState.errors.userMobilePhone && (
                   <p className="text-red-500/90">
-                    {form.formState.errors.userMobilePhone?.message}
+                    {formSignUp.formState.errors.userMobilePhone?.message}
                   </p>
                 )}
               </div>
